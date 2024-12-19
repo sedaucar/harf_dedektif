@@ -10,9 +10,11 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Tween,
 		C3.Plugins.Arr,
 		C3.Behaviors.Rotate,
+		C3.Behaviors.Flash,
 		C3.Plugins.System.Cnds.OnLayoutStart,
 		C3.Plugins.Sprite.Acts.SetVisible,
-		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
+		C3.Plugins.System.Cnds.CompareBoolVar,
+		C3.Plugins.Audio.Cnds.IsTagPlaying,
 		C3.Plugins.Audio.Acts.Play,
 		C3.Plugins.Touch.Cnds.OnTouchObject,
 		C3.Plugins.System.Acts.SetLayerVisible,
@@ -28,6 +30,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Browser.Acts.RequestFullScreen,
 		C3.Plugins.Browser.Acts.CancelFullScreen,
 		C3.Plugins.Audio.Acts.SetPaused,
+		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.Sprite.Acts.Destroy,
 		C3.Plugins.System.Acts.CreateObject,
 		C3.Plugins.Arr.Exps.Back,
@@ -54,15 +57,17 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.DragnDrop.Cnds.OnDrop,
 		C3.Plugins.System.Cnds.LayerVisible,
 		C3.Plugins.Sprite.Cnds.IsOverlapping,
+		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
 		C3.Plugins.Sprite.Acts.SetPosToObject,
 		C3.Plugins.System.Acts.AddVar,
 		C3.Behaviors.DragnDrop.Acts.SetEnabled,
-		C3.Plugins.System.Acts.Wait,
 		C3.Plugins.System.Cnds.CompareVar,
+		C3.Plugins.System.Acts.Wait,
+		C3.Behaviors.Flash.Acts.Flash,
 		C3.Behaviors.Tween.Acts.TweenTwoProperties,
+		C3.Plugins.Sprite.Cnds.IsVisible,
 		C3.Plugins.Arr.Cnds.IsEmpty,
-		C3.Plugins.System.Cnds.OnLayoutEnd,
-		C3.Plugins.Audio.Acts.Stop
+		C3.Plugins.System.Cnds.OnLayoutEnd
 	];
 };
 self.C3_JsPropNameTable = [
@@ -104,7 +109,10 @@ self.C3_JsPropNameTable = [
 	{Rotate: 0},
 	{Sprite: 0},
 	{btnTekrarOyna: 0},
+	{Flash: 0},
+	{dogruTik: 0},
 	{butonlar: 0},
+	{muzikdurum: 0},
 	{rastsay: 0},
 	{dogru: 0},
 	{cevap: 0},
@@ -141,5 +149,6 @@ self.InstanceType = {
 	tebrikler: class extends self.ISpriteInstance {},
 	Sprite: class extends self.ISpriteInstance {},
 	btnTekrarOyna: class extends self.ISpriteInstance {},
+	dogruTik: class extends self.ISpriteInstance {},
 	butonlar: class extends self.ISpriteInstance {}
 }

@@ -1291,6 +1291,11 @@ const C3=self.C3,C3X=self.C3X,IBehaviorInstance=self.IBehaviorInstance,Ease=self
 {const a=self.C3;a.Behaviors.Rotate=class extends a.SDKBehaviorBase{constructor(e){super(e)}Release(){super.Release()}}}{const d=self.C3;d.Behaviors.Rotate.Type=class extends d.SDKBehaviorTypeBase{constructor(e){super(e)}Release(){super.Release()}OnCreate(){}}}{const g=self.C3,h=self.C3X,i=self.IBehaviorInstance,j=0,k=1,l=2,m=(g.Behaviors.Rotate.Instance=class extends g.SDKBehaviorInstanceBase{constructor(e,t){super(e),this._speed=0,this._acceleration=0,this._isEnabled=!0,t&&(this._speed=g.toRadians(t[j]),this._acceleration=g.toRadians(t[k]),this._isEnabled=t[l]),this._isEnabled&&this._StartTicking()}Release(){super.Release()}_SetSpeed(e){this._speed=e}_GetSpeed(){return this._speed}_SetAcceleration(e){this._acceleration=e}_GetAcceleration(){return this._acceleration}SaveToJson(){return{"s":this._speed,"a":this._acceleration,"e":this._isEnabled}}LoadFromJson(e){this._speed=e["s"],this._acceleration=e["a"],this._SetEnabled(e["e"])}Tick(){if(this._isEnabled){const e=this._runtime.GetDt(this._inst);if(0!==e&&(0!==this._acceleration&&(this._speed+=this._acceleration*e),0!==this._speed)){const t=this._inst.GetWorldInfo();t.SetAngle(t.GetAngle()+this._speed*e),t.SetBboxChanged()}}}GetPropertyValueByIndex(e){switch(e){case j:return g.toDegrees(this._GetSpeed());case k:return g.toDegrees(this._GetAcceleration());case l:return this._IsEnabled()}}SetPropertyValueByIndex(e,t){switch(e){case j:this._SetSpeed(g.toRadians(t));break;case k:this._SetAcceleration(g.toRadians(t));break;case l:this._SetEnabled(t)}}_SetEnabled(e){this._isEnabled=!!e,this._isEnabled?this._StartTicking():this._StopTicking()}_IsEnabled(){return this._isEnabled}GetDebuggerProperties(){const e="behaviors.rotate";return[{title:"$"+this.GetBehaviorType().GetName(),properties:[{name:e+".properties.speed.name",value:g.toDegrees(this._GetSpeed()),onedit:e=>this._SetSpeed(g.toRadians(e))},{name:e+".properties.acceleration.name",value:g.toDegrees(this._GetAcceleration()),onedit:e=>this._SetAcceleration(g.toRadians(e))},{name:e+".properties.enabled.name",value:this._IsEnabled(),onedit:e=>this._SetEnabled(e)}]}]}GetScriptInterfaceClass(){return self.IRotateBehaviorInstance}},new WeakMap);self.IRotateBehaviorInstance=class extends i{constructor(){super(),m.set(this,i._GetInitInst().GetSdkInstance())}set speed(e){h.RequireFiniteNumber(e),m.get(this)._SetSpeed(e)}get speed(){return m.get(this)._GetSpeed()}set acceleration(e){h.RequireFiniteNumber(e),m.get(this)._SetAcceleration(e)}get acceleration(){return m.get(this)._GetAcceleration()}get isEnabled(){return m.get(this)._IsEnabled()}set isEnabled(e){m.get(this)._SetEnabled(e)}}}{const H=self.C3;H.Behaviors.Rotate.Cnds={IsEnabled(){return this._IsEnabled()}}}{const I=self.C3;I.Behaviors.Rotate.Acts={SetSpeed(e){this._SetSpeed(I.toRadians(e))},SetAcceleration(e){this._SetAcceleration(I.toRadians(e))},SetEnabled(e){this._SetEnabled(e)}}}{const M=self.C3;M.Behaviors.Rotate.Exps={Speed(){return M.toDegrees(this._GetSpeed())},Acceleration(){return M.toDegrees(this._GetAcceleration())}}}
 }
 
+// scripts/behaviors/Flash/c3runtime/runtime.js
+{
+{const a=self.C3;a.Behaviors.Flash=class extends a.SDKBehaviorBase{constructor(e){super(e)}Release(){super.Release()}}}{const d=self.C3;d.Behaviors.Flash.Type=class extends d.SDKBehaviorTypeBase{constructor(e){super(e)}Release(){super.Release()}OnCreate(){}}}{const g=self.C3,h=self.C3X,i=self.IBehaviorInstance,j=(g.Behaviors.Flash.Instance=class extends g.SDKBehaviorInstanceBase{constructor(e,t){super(e),this._onTime=0,this._offTime=0,this._stage=0,this._stageTimeLeft=0,this._timeLeft=0,this._StartTicking()}Release(){super.Release()}_Flash(e,t,s){this._onTime=e,this._offTime=t,this._stage=1,this._stageTimeLeft=t,this._timeLeft=s,this._inst.GetWorldInfo().SetVisible(!1),this._runtime.UpdateRender()}_StopFlashing(){this._timeLeft=0,this._inst.GetWorldInfo().SetVisible(!0),this._runtime.UpdateRender()}_IsFlashing(){return 0<this._timeLeft}SaveToJson(){return{"on":this._onTime,"off":this._offTime,"s":this._stage,"stl":this._stageTimeLeft,"tl":this._timeLeft}}LoadFromJson(e){this._onTime=e["on"],this._offTime=e["off"],this._stage=e["s"],this._stageTimeLeft=e["stl"],this._timeLeft=null===e["tl"]?1/0:e["tl"]}Tick(){if(!(this._timeLeft<=0)){const e=this._runtime.GetDt(this._inst);if(this._timeLeft-=e,this._timeLeft<=0)return this._timeLeft=0,this._inst.GetWorldInfo().SetVisible(!0),this._runtime.UpdateRender(),this.DispatchScriptEvent("flashend"),this.DebugTrigger(g.Behaviors.Flash.Cnds.OnFlashEnded);this._stageTimeLeft-=e,this._stageTimeLeft<=0&&(0===this._stage?(this._inst.GetWorldInfo().SetVisible(!1),this._stage=1,this._stageTimeLeft+=this._offTime):(this._inst.GetWorldInfo().SetVisible(!0),this._stage=0,this._stageTimeLeft+=this._onTime),this._runtime.UpdateRender())}}GetDebuggerProperties(){const e="behaviors.flash.debugger";return[{title:"$"+this.GetBehaviorType().GetName(),properties:[{name:e+".on-time",value:this._onTime,onedit:e=>this._onTime=e},{name:e+".off-time",value:this._offTime,onedit:e=>this._offTime=e},{name:e+".is-flashing",value:0<this._timeLeft},{name:e+".time-left",value:this._timeLeft}]}]}GetScriptInterfaceClass(){return self.IFlashBehaviorInstance}},new WeakMap);self.IFlashBehaviorInstance=class extends i{constructor(){super(),j.set(this,i._GetInitInst().GetSdkInstance())}flash(e,t,s){h.RequireFiniteNumber(e),h.RequireFiniteNumber(t),h.RequireFiniteNumber(s),j.get(this)._Flash(e,t,s)}stop(){j.get(this)._StopFlashing()}get isFlashing(){return j.get(this)._IsFlashing()}}}{const z=self.C3;z.Behaviors.Flash.Cnds={IsFlashing(){return this._IsFlashing()},OnFlashEnded(){return!0}}}{const A=self.C3;A.Behaviors.Flash.Acts={Flash(e,t,s){this._Flash(e,t,s)},StopFlashing(){this._StopFlashing()}}}{const E=self.C3;E.Behaviors.Flash.Exps={}}
+}
+
 // scripts/expTable.js
 {
 
@@ -1389,11 +1394,11 @@ function or(l, r)
 }
 
 self.C3_ExpressionFuncs = [
-		() => 1,
-		() => 0,
 		() => "muzik",
+		() => 0,
 		() => "bilgi",
 		() => "background",
+		() => 1,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpInstVar();
@@ -1408,7 +1413,7 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject();
 		},
-		() => -20,
+		() => -10,
 		() => 10,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -1450,6 +1455,7 @@ self.C3_ExpressionFuncs = [
 			const f2 = p._GetNode(2).GetBoundMethod();
 			return () => f0(v1.GetValue(), f2(), "");
 		},
+		() => 0.1,
 		() => 0.5
 ];
 
